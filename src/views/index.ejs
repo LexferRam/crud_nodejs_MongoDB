@@ -1,0 +1,64 @@
+<%- include('partials/head') %>
+
+
+<div class="container">
+    <h1>CRUD nodeJS</h1>
+    <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="card">
+              <div class="card-header">
+                  <h3>Add task</h3>
+              </div>
+              <div class="card-body">
+                <form action="/add" method="POST">
+                    <div class="form-group">
+                        <input class="form-control" name="title" type="text" placeholder="Title" autofocus require>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="description" rows="10" placeholder="Description" require></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="ADD" class="btn btn-success btn-block">
+                    </div>
+                </form>
+              </div>
+          </div>
+        </div>
+        <!-- table tasks -->
+        <div class="col-md-8">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(i=0; i< tasks.length; i++){ %>
+                        <tr>
+                            <th scope="row"><%= i+1 %></th>
+                            <td><%= tasks[i].title %></td>
+                            <td><%= tasks[i].description %></td>
+                            <td>
+                                <a class="btn btn-block btn-<%= tasks[i].status ? 'primary' : 'dark' %>" href="/status/<%= tasks[i]._id %>">Done</a>
+                                <a class="btn btn-block btn-danger" href="/delete/<%= tasks[i]._id %>">Delete</a>
+                                <a class="btn btn-block btn-success" href="/edit/<%= tasks[i]._id %>">Edit</a>
+                            </td>
+                          </tr>
+                    <% } %>
+                  </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<%- include('partials/footer') %>
